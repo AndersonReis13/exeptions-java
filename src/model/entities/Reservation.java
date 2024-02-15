@@ -43,9 +43,19 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS); // TIME-UNIT É UMA CLASSE DO JAVA QUE FAZ A CONVERÇÃO DOS MILISEGUNDOS/SEGUNDOS/MINUTOS/DIAS EM DIAS OU QUALQUER OUTRA COISA EM RELAÇÃO AO TEMPO.
 	}
 	
-	public void UpdateDate( Date chakIn, Date chakOut) {
+	public String UpdateDate( Date chakIn, Date chakOut) {
+		
+		Date now = new Date();
+		if(chakIn.before(now) || chakOut.before(chakOut) ) {
+			return "Reservation dates for update future";
+		}
+		if(!chakOut.after(chakIn)) {
+			return "Erro in reservation: Chak-out must be after chak-In date";
+		}
+		
 		this.chakIn = chakIn;
 		this.chakOut = chakOut;
+		return null; // Bom, por que retornar nulo? porque caso os dois if seja correto acima, não vai ter nada para retornar então tenho que retornar nullo para mostrar la que deu tudo certo.
 	}
 	
 	@Override

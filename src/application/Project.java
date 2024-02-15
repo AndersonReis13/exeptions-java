@@ -30,17 +30,19 @@ public class Project {
 			chakIn = sdf.parse(sc.next()); 
 			System.out.print("Chack-in date(dd/MM/yyyy) ");
 			chakOut = sdf.parse(sc.next());
-			Date now = new Date();
-			if(chakIn.before(now) || chakOut.before(chakOut) ) {
-				System.out.println("Erro in reservation: Chak-out must be after chak-In date now");
-			}else if(!chakOut.after(chakIn)) {
-				System.out.println("Erro in reservation: Chak-out must be after chak-In date");
-			}else{
+			
 				
-				reservation.UpdateDate(chakIn, chakOut);
-				System.out.println("Reservation: " + reservation);
-
-			}	
+				String erro = reservation.UpdateDate(chakIn, chakOut);
+				if(erro != null) {
+					System.out.println("Erro in reservation: " + erro);
+					/*
+					 * esse if esta falando que se for diferente de nulo o erro, 
+					 * quer dizer que o erro foi detctado e será mostrado qual foi.
+					 */
+				}else {
+					System.out.println("Reservation: " + reservation);	
+				}
+				
 		}
 	}
 }
